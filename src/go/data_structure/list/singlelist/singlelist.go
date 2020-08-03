@@ -1,9 +1,11 @@
 package singlelist
 
+import "fmt"
+
 // Element : list node
 type Element struct {
-	next  *Element
-	list  *List
+	next *Element
+	//list  *List
 	Value interface{}
 }
 
@@ -21,7 +23,45 @@ func (l *List) Init() *List {
 	return l
 }
 
-// New returns an initialized list
-func New() *List {
+// NewSingleList returns an initialized list
+func NewSingleList() *List {
 	return new(List).Init()
+}
+
+// PushToHead insert
+func (l *List) PushToHead(insertValue interface{}) *Element {
+	newNode := new(Element)
+	newNode.Value = insertValue
+
+	newNode.next = l.root.next
+	l.root.next = newNode
+
+	l.len++
+	return newNode
+}
+
+// PushToTail insert
+func (l *List) PushToTail(insertValue interface{}) *Element {
+	newNode := new(Element)
+	newNode.Value = insertValue
+
+	// find the tail node
+	tailNode := l.root.next
+	for i := 0; i < l.len-1; i++ {
+		tailNode = tailNode.next
+	}
+
+	tailNode.next = newNode
+
+	l.len++
+	return newNode
+}
+
+// PrintList to the console
+func (l *List) PrintList() {
+	currentNode := l.root.next
+	for i := 0; i < l.len; i++ {
+		fmt.Println(currentNode.Value)
+		currentNode = currentNode.next
+	}
 }
