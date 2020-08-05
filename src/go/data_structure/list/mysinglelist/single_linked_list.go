@@ -1,4 +1,4 @@
-package singlelist
+package mysinglelist
 
 import "fmt"
 
@@ -12,13 +12,14 @@ type Element struct {
 // List : root node of the list
 type List struct {
 	root Element
+	tail *Element
 	len  int
 }
 
 // Init initializes or clears list l
 func (l *List) Init() *List {
 	l.root.next = &l.root
-	// l.root.prev = &l.root
+	l.tail = &l.root
 	l.len = 0
 	return l
 }
@@ -46,12 +47,13 @@ func (l *List) PushToTail(insertValue interface{}) *Element {
 	newNode.Value = insertValue
 
 	// find the tail node
-	tailNode := l.root.next
-	for i := 0; i < l.len-1; i++ {
-		tailNode = tailNode.next
-	}
+	// tailNode := l.root.next
+	// for i := 0; i < l.len-1; i++ {
+	// 	tailNode = tailNode.next
+	// }
 
-	tailNode.next = newNode
+	l.tail.next = newNode
+	l.tail = newNode
 
 	l.len++
 	return newNode

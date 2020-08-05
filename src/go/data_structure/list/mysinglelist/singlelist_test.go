@@ -1,4 +1,4 @@
-package singlelist
+package mysinglelist
 
 import "testing"
 

@@ -1,3 +1,5 @@
+package leetcode
+
 /*
  * @lc app=leetcode id=1 lang=golang
  *
@@ -31,7 +33,6 @@
  *
  *
  */
-package p100
 
 // @lc code=start
 func twoSum(nums []int, target int) []int {
