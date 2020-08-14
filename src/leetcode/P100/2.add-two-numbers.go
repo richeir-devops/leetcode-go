@@ -21,54 +21,6 @@ package leetcode
 // 	Next *ListNode
 // }
 
-func reverseLinkedListToNumber(list *ListNode) int {
-	var result = 0
-	var i = 1
-	for {
-		if list != nil {
-			result += list.Val * i
-			i *= 10
-			list = list.Next
-		} else {
-			break
-		}
-	}
-
-	return result
-}
-
-func numToReverseLinkedList(num int) *ListNode {
-	var head *ListNode
-	var p *ListNode
-	for {
-		var node = new(ListNode)
-		node.Val = num % 10
-		if head == nil {
-			head = node
-			p = head
-		} else {
-			p.Next = node
-			p = p.Next
-		}
-
-		num /= 10
-
-		if num == 0 {
-			break
-		}
-	}
-
-	return head
-}
-
-// func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-// 	var num1 = reverseLinkedListToNumber(l1)
-// 	var num2 = reverseLinkedListToNumber(l2)
-// 	var result = num1 + num2
-
-// 	return numToReverseLinkedList(result)
-// }
-
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var result = new(ListNode)
 	result.Val = 0
