@@ -1,10 +1,4 @@
-package leetcode
-
-/*
- * @lc app=leetcode id=2 lang=golang
- *
- * [2] Add Two Numbers
- */
+package p100
 
 // @lc code=start
 /**
@@ -21,45 +15,43 @@ package leetcode
 // 	Next *ListNode
 // }
 
-func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	var result = new(ListNode)
-	result.Val = 0
-	var plus = false
-	var p = result
-	for {
-		if l1 != nil || l2 != nil {
-			if l1 != nil {
-				p.Val += l1.Val
-				l1 = l1.Next
-			}
-			if l2 != nil {
-				p.Val += l2.Val
-				l2 = l2.Next
-			}
+// func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+// 	var result = new(ListNode)
+// 	result.Val = 0
+// 	var plus = false
+// 	var p = result
+// 	for {
+// 		if l1 != nil || l2 != nil {
+// 			if l1 != nil {
+// 				p.Val += l1.Val
+// 				l1 = l1.Next
+// 			}
+// 			if l2 != nil {
+// 				p.Val += l2.Val
+// 				l2 = l2.Next
+// 			}
 
-			if p.Val > 9 {
-				plus = true
-				p.Val -= 10
-			}
+// 			if p.Val > 9 {
+// 				plus = true
+// 				p.Val -= 10
+// 			}
 
-			if l1 != nil || l2 != nil || plus {
-				var newNode = new(ListNode)
-				if plus {
-					newNode.Val++
-					plus = false
-				}
-				p.Next = newNode
-				p = newNode
-			} else {
-				break
-			}
-		} else {
-			break
-		}
-	}
+// 			if l1 != nil || l2 != nil || plus {
+// 				var newNode = new(ListNode)
+// 				if plus {
+// 					newNode.Val++
+// 					plus = false
+// 				}
+// 				p.Next = newNode
+// 				p = newNode
+// 			} else {
+// 				break
+// 			}
+// 		} else {
+// 			break
+// 		}
+// 	}
 
-	plus = false
-	return result
-}
-
-// @lc code=end
+// 	plus = false
+// 	return result
+// }
