@@ -15,8 +15,13 @@ func Test1(t *testing.T) {
 	t.Log("l1 OK!")
 
 	l2 := NewSingleList()
-	l2.PushToTail(22)
-	l2.PushToTail(23)
+	l2.PushToTail(1)
+	l2.PushToTail(2)
+	l2.PushToTail(3)
+	l2.PushToTail(4)
+	l2.PushToTail(5)
 	l2.PrintList()
 	t.Log("l2 OK!")
+	l2.ReverseList()
+	l2.PrintList()
 }

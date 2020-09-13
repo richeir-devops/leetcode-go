@@ -59,6 +59,24 @@ func (l *List) PushToTail(insertValue interface{}) *Element {
 	return newNode
 }
 
+// Reverse the entire list
+func (l *List) ReverseList() {
+	var p, q *Element
+	p = l.root.next
+	q = nil
+	//fireNode := true
+	for p != nil {
+		next := p.next
+		p.next = q
+		q = p
+		if next == nil {
+			l.root.next = p
+			break
+		}
+		p = next
+	}
+}
+
 // PrintList to the console
 func (l *List) PrintList() {
 	currentNode := l.root.next
