@@ -1,4 +1,4 @@
-package daily202008
+package p500
 
 import (
 	"fmt"
