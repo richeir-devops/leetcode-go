@@ -1,4 +1,4 @@
-package p100
+package p000
 
 import "testing"
 
