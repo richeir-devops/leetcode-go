@@ -1,4 +1,4 @@
-package daily202008
+package p000
 
 func isValid(s string) bool {
 	intStr := []rune(s)
@@ -18,33 +18,31 @@ func isValid(s string) bool {
 		case 41:
 			if len(targetStack) != 0 && targetStack[lengTarget] != 40 {
 				return false
-			} else {
-				targetStack = append(targetStack[:lengTarget])
 			}
+			targetStack = append(targetStack[:lengTarget])
 
 		case 91:
 			targetStack = append(targetStack, intStr[i])
 		case 93:
 			if len(targetStack) != 0 && targetStack[lengTarget] != 91 {
 				return false
-			} else {
-				targetStack = append(targetStack[:lengTarget])
 			}
+			targetStack = append(targetStack[:lengTarget])
 
 		case 123:
 			targetStack = append(targetStack, intStr[i])
 		case 125:
 			if len(targetStack) != 0 && targetStack[lengTarget] != 123 {
 				return false
-			} else {
-				targetStack = append(targetStack[:lengTarget])
 			}
+			targetStack = append(targetStack[:lengTarget])
+
 		}
 	}
 
 	if len(targetStack) != 0 {
 		return false
-	} else {
-		return true
 	}
+	return true
+
 }
