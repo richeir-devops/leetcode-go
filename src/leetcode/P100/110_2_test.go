@@ -108,4 +108,7 @@ func Test_110_1(t *testing.T) {
 	// root.Left = new(TreeNode)
 
 	t.Log(isBalanced(root))
+
+	ch := 'b'
+	t.Log(ch / 2.0)
 }
