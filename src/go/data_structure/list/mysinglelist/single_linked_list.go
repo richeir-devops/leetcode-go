@@ -2,7 +2,6 @@ package mysinglelist
 
 import "fmt"
 
-// Element : list node
 type Element struct {
 	next *Element
 	//list  *List
