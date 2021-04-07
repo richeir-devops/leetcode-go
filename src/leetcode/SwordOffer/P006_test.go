@@ -9,17 +9,16 @@ import "testing"
 // }
 
 func reversePrint(head *ListNode) []int {
-	var result []int
-	var tempSlice []int
-
-	for i := 0; &head != nil; i++ {
-		tempSlice[i] = head.Val
+	result := []int{}
+	tempSlice := []int{}
+	for i := 0; head != nil; i++ {
+		tempSlice = append(tempSlice, head.Val)
 		head = head.Next
 	}
 
 	lenSlice := len(tempSlice)
-	for i := lenSlice - 1; i > 0; i-- {
-		result[lenSlice-i-1] = tempSlice[i]
+	for i := lenSlice - 1; i >= 0; i-- {
+		result = append(result, tempSlice[i])
 	}
 
 	return result
