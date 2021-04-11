@@ -1,127 +1,114 @@
 package daily202008
 
-// import "testing"
+import (
+	"testing"
+)
 
-// type TreeNode struct {
-// 	Val   int
-// 	Left  *TreeNode
-// 	Right *TreeNode
-// }
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
 
-// func isBalanced(root *TreeNode) bool {
-// 	if root == nil {
-// 		return true
-// 	}
+func isBalanced(root *TreeNode) bool {
+	if root == nil {
+		return true
+	}
 
-// 	leftBalance := false
-// 	rightBalance := false
-// 	leftLevel := 0
-// 	rightLevel := 0
-// 	if root.Left != nil {
-// 		leftBalance, leftLevel = oneSide(root.Left)
-// 		leftLevel++
-// 	} else {
-// 		leftBalance = true
-// 	}
+	balance, _ := CheckNode(root)
 
-// 	if root.Right != nil {
-// 		rightBalance, rightLevel = oneSide(root.Right)
-// 		rightLevel++
-// 	} else {
-// 		rightBalance = true
-// 	}
+	if balance {
+		return true
+	}
 
-// 	if root.Left == nil && root.Right == nil {
-// 		return true
-// 	}
+	return false
+}
 
-// 	levelDiffer := leftLevel - rightLevel
+func CheckNode(node *TreeNode) (bool, int) {
+	deepL := 0
+	deepR := 0
+	allBalance := true
 
-// 	if leftBalance && rightBalance {
-// 		if levelDiffer >= -1 && levelDiffer <= 1 {
-// 			return true
-// 		}
-// 	}
+	if node.Left != nil {
+		allBalance, deepL = CheckNode(node.Left)
+		if !allBalance {
+			return false, 0
+		}
+	}
 
-// 	return false
-// }
+	if node.Right != nil {
+		allBalance, deepR = CheckNode(node.Right)
+		if !allBalance {
+			return false, 0
+		}
+	}
 
-// func oneSide(root *TreeNode) (bool, int) {
-// 	if root == nil {
-// 		return true, 0
-// 	}
+	//叶子节点处理
+	if node.Left == nil && node.Right == nil {
+		return true, 1
+	}
 
-// 	leftLevel := 0
-// 	leftCurrentLevel := 0
-// 	rightLevel := 0
-// 	rightCurrentLevel := 0
+	//判断当前节点的是否平衡
+	if node.Left != nil && node.Right != nil {
+		// deepL++
+		// deepR++
 
-// 	if root.Left != nil {
-// 		leftLevel++
-// 		haveChild(root.Left, &leftCurrentLevel, &leftLevel)
-// 	}
+		if deepL-deepR <= 1 && deepL-deepR >= -1 {
+			allBalance = true
+		} else {
+			return false, 0
+		}
 
-// 	if root.Right != nil {
-// 		rightLevel++
-// 		haveChild(root.Right, &rightCurrentLevel, &rightLevel)
-// 	}
+		if deepL > deepR {
+			return true, deepL + 1
+		}
+		return true, deepR + 1
+	} else if node.Left != nil && node.Right == nil {
+		// deepL++
 
-// 	levelDiffer := leftLevel - rightLevel
+		if deepL-deepR <= 1 && deepL-deepR >= -1 {
+			allBalance = true
+		} else {
+			return false, 0
+		}
 
-// 	totalLevel := 0
-// 	if leftLevel < rightLevel {
-// 		totalLevel = rightLevel
-// 	} else {
-// 		totalLevel = leftLevel
-// 	}
+		return allBalance, deepL + 1
+	} else {
+		// deepR++
 
-// 	if levelDiffer < -1 || levelDiffer > 1 {
-// 		return false, totalLevel
-// 	}
-// 	return true, totalLevel
-// }
+		if deepL-deepR <= 1 && deepL-deepR >= -1 {
+			allBalance = true
+		} else {
+			return false, 0
+		}
 
-// func haveChild(node *TreeNode, currentLevel *int, totalLevel *int) {
-// 	if *totalLevel > *currentLevel {
-// 		*currentLevel++
-// 	}
+		return allBalance, deepR + 1
+	}
+}
 
-// 	hvaeTraveled := false
+func Test_110_1(t *testing.T) {
+	t.Log("110")
+	b := 3
+	var a *int
+	a = &b
+	*a++
+	t.Log(b)
 
-// 	if node.Left != nil {
-// 		if !hvaeTraveled {
-// 			*totalLevel++
-// 			hvaeTraveled = true
-// 		}
-// 		haveChild(node.Left, currentLevel, totalLevel)
-// 	}
+	// root := new(TreeNode)
+	// root.Left = new(TreeNode)
+	// root.Right = new(TreeNode)
+	// root.Right.Left = new(TreeNode)
+	// root.Right.Right = new(TreeNode)
 
-// 	if node.Right != nil {
-// 		if !hvaeTraveled {
-// 			*totalLevel++
-// 			hvaeTraveled = true
-// 		}
-// 		haveChild(node.Right, currentLevel, totalLevel)
-// 	}
-// }
+	root := new(TreeNode)
+	root.Right = new(TreeNode)
+	root.Right.Right = new(TreeNode)
 
-// func Test_110_1(t *testing.T) {
-// 	t.Log("110")
-// 	b := 3
-// 	var a *int
-// 	a = &b
-// 	*a++
-// 	t.Log(b)
+	// root := new(TreeNode)
+	// root.Left = new(TreeNode)
 
-// 	// root := new(TreeNode)
-// 	// root.Left = new(TreeNode)
-// 	// root.Right = new(TreeNode)
-// 	// root.Right.Left = new(TreeNode)
-// 	// root.Right.Right = new(TreeNode)
+	t.Log(isBalanced(root))
 
-// 	root := new(TreeNode)
-// 	root.Right = new(TreeNode)
-// 	root.Right.Right = new(TreeNode)
-
-// 	t.Log(isBalanced(root))
-// }
+	ch := 'b'
+	t.Log(ch / 2.0)
+}
