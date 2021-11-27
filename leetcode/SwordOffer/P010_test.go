@@ -42,7 +42,7 @@ func findInMap(fibMap *map[int]int, n int) (int, bool) {
 	}
 }
 
-// 方法3：动态规划（实际上市正向求解）
+// 方法3：动态规划（实际上是正向求解）
 func fib3(n int) int {
 	a := 0
 	b := 1
