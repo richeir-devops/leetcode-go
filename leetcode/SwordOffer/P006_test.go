@@ -54,16 +54,16 @@ func Test_P006_01(t *testing.T) {
 // *[]int 可以作为参数接收 &[]int
 // *[]int --> **[]int = []int
 
-func reversePrint_2(head *ListNode) []int {
+func reversePrint006_2(head *ListNode) []int {
 	result := make([]int, 0)
-	return recur(head, &result)
+	return recur006(head, &result)
 }
 
-func recur(head *ListNode, result *[]int) []int {
+func recur006(head *ListNode, result *[]int) []int {
 	if head == nil {
 		return *result
 	} else {
-		recur(head.Next, result)
+		recur006(head.Next, result)
 		*result = append(*result, head.Val)
 	}
 
@@ -77,7 +77,7 @@ func Test_P006_02(t *testing.T) {
 			Next: &ListNode{Val: 2},
 		},
 	}
-	t.Log(reversePrint_2(list1))
+	t.Log(reversePrint_006_2(list1))
 }
 
 // 执行用时：4 ms, 在所有 Go 提交中击败了 43.14% 的用户

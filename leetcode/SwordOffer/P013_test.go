@@ -4,6 +4,7 @@ import (
 	"testing"
 )
 
+// 方案1：DFS 深度优先搜索
 func movingCount(m int, n int, k int) int {
 	matrix := make([][]int, m)
 
@@ -53,6 +54,8 @@ func p13CalcIntSum(num int) int {
 
 	return result
 }
+
+// 方案2：可以使用队列做BFS，广度优先搜索
 
 func Test_P013_01(t *testing.T) {
 	m := 3
