@@ -1,5 +1,7 @@
 package SwordOffer
 
+import "testing"
+
 // Definition for a binary tree node.
 type TreeNode struct {
 	Val   int
@@ -28,6 +30,6 @@ func recur007(root, left, right int, preorder []int, dic map[int]int) *TreeNode 
 	return node
 }
 
-func Test_P007_01() {
+func Test_P007_01(t *testing.T) {
 
 }

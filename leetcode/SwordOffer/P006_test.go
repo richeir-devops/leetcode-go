@@ -77,7 +77,7 @@ func Test_P006_02(t *testing.T) {
 			Next: &ListNode{Val: 2},
 		},
 	}
-	t.Log(reversePrint_006_2(list1))
+	t.Log(reversePrint006_2(list1))
 }
 
 // 执行用时：4 ms, 在所有 Go 提交中击败了 43.14% 的用户
