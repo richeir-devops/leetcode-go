@@ -52,9 +52,9 @@ func swap(arr *[]int, i int, j int) {
 func Test1(t *testing.T) {
 	t.Log("quick sort")
 	arr := []int{5, 7, 1, 6, 4, 8, 3, 2}
-	t.Log((arr))
+	t.Log(arr)
 	swap(&arr, 1, 2)
-	t.Log((arr))
+	t.Log(arr)
 	quickSort(&arr, 0, len(arr)-1)
-	t.Log((arr))
+	t.Log(arr)
 }
