@@ -61,54 +61,27 @@ func dict_compare_953(a, b, dict string) bool {
 	return isNeedExchange
 }
 
-func Test_953_01(t *testing.T) {
-	t.Logf("\n 953. 验证外星语词典 \n")
+func Test_953_Mixed(t *testing.T) {
 
-	words := []string{"apple", "app"}
-	dictIndex := "abcdefghijklmnopqrstuvwxyz"
+	testCases := []struct {
+		words     []string
+		dictIndex string
+		want      bool
+	}{
+		{[]string{"apple", "app"}, "abcdefghijklmnopqrstuvwxyz", false},
+		{[]string{"word", "world", "row"}, "worldabcefghijkmnpqstuvxyz", false},
+		{[]string{"kuvp", "q"}, "ngxlkthsjuoqcpavbfdermiywz", true},
+		{[]string{"hello", "leetcode"}, "hlabcdefgijkmnopqrstuvwxyz", true},
+		{[]string{"l", "h"}, "xkbwnqozvterhpjifgualycmds", false},
+		{[]string{"app", "apple"}, "abcdefghijklmnopqrstuvwxyz", true},
+	}
 
-	// bubble_sort_953(words, dictIndex)
-	// t.Log(words)
+	for i, tt := range testCases {
+		got := isAlienSorted(tt.words, tt.dictIndex)
+		if got != tt.want {
+			t.Errorf("\nTest Case #%v \ndata: %v \ngot: %v \nwant: %v \n\n", i, tt, got, tt.want)
+		}
+	}
 
-	t.Log(isAlienSorted(words, dictIndex)) // false
-
-	words = []string{"word", "world", "row"}
-	dictIndex = "worldabcefghijkmnpqstuvxyz"
-
-	// bubble_sort_953(words, dictIndex)
-	// t.Log(words)
-
-	t.Log(isAlienSorted(words, dictIndex)) // false
-
-}
-
-func Test_953_02(t *testing.T) {
-	words := []string{"kuvp", "q"}
-	dictIndex := "ngxlkthsjuoqcpavbfdermiywz"
-
-	t.Log(strings.Index(dictIndex, "k"))
-	t.Log(strings.Index(dictIndex, "q"))
-
-	t.Log(isAlienSorted(words, dictIndex)) // true
-}
-
-func Test_953_03(t *testing.T) {
-	words := []string{"hello", "leetcode"}
-	dictIndex := "hlabcdefgijkmnopqrstuvwxyz"
-
-	t.Log(isAlienSorted(words, dictIndex)) // true
-}
-
-func Test_953_04(t *testing.T) {
-	words := []string{"l", "h"}
-	dictIndex := "xkbwnqozvterhpjifgualycmds"
-
-	t.Log(isAlienSorted(words, dictIndex)) // false
-}
-
-func Test_953_05(t *testing.T) {
-	words := []string{"app", "apple"}
-	dictIndex := "abcdefghijklmnopqrstuvwxyz"
-
-	t.Log(isAlienSorted(words, dictIndex)) // true
+	t.Log("All test cases are passed.")
 }
