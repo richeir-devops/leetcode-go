@@ -15,7 +15,7 @@ func countEven(num int) int {
 
 func countEven_isEven(num int) bool {
 	sum := 0
-	for true {
+	for {
 		sum += num % 10
 		num /= 10
 		if num == 0 {
