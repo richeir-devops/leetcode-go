@@ -1,4 +1,4 @@
-package daily202008
+package P100
 
 import "testing"
 
