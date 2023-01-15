@@ -5,6 +5,7 @@ import "testing"
 func evaluate(s string, knowledge [][]string) string {
 	result := ""
 	srune := []rune(s)
+	kmap := evaluate_get_mapped(knowledge)
 
 	for i := 0; i < len(srune); i++ {
 		if srune[i] == '(' {
@@ -19,8 +20,13 @@ func evaluate(s string, knowledge [][]string) string {
 
 			keyStr := string(key)
 			i += len(keyStr) + 1
-			var keyResult = evaluate_findkey(keyStr, knowledge)
-			result += keyResult
+
+			if keyResult, exist := kmap[keyStr]; exist {
+				result += keyResult
+			} else {
+				result += "?"
+			}
+
 		} else {
 			result += string(srune[i])
 		}
@@ -29,14 +35,13 @@ func evaluate(s string, knowledge [][]string) string {
 	return result
 }
 
-func evaluate_findkey(key string, knowledge [][]string) string {
+func evaluate_get_mapped(knowledge [][]string) map[string]string {
+	kmap := make(map[string]string)
 	for i := 0; i < len(knowledge); i++ {
-		if knowledge[i][0] == key {
-			return knowledge[i][1]
-		}
+		kmap[knowledge[i][0]] = knowledge[i][1]
 	}
 
-	return "?"
+	return kmap
 }
 
 func Test_1807_01(t *testing.T) {
@@ -46,6 +51,9 @@ func Test_1807_01(t *testing.T) {
 		want      string
 	}{
 		{"(name)is(age)yearsold", [][]string{{"name", "bob"}, {"age", "two"}}, "bobistwoyearsold"},
+		{"(name)is(age)yearsold", [][]string{{"name", "bob"}, {"agee", "two"}}, "bobis?yearsold"},
+		{"hi(name)", [][]string{{"a", "b"}}, "hi?"},
+		{"(z)h", [][]string{}, "?h"},
 	}
 
 	for i, tt := range testCases {
