@@ -1,6 +1,8 @@
 package P100
 
-import "testing"
+import (
+	"testing"
+)
 
 /**
  * Definition for a binary tree node.
@@ -11,26 +13,25 @@ import "testing"
  * }
  */
 func minDepth(root *TreeNode) int {
-	return minDepth_caclDepth(root, 1)
-}
-
-func minDepth_caclDepth(root *TreeNode, deep int) int {
-	deepLeft := deep
-	deepRight := deep
-	if root.Left != nil {
-		deepLeft++
-		deepLeft = minDepth_caclDepth(root.Left, deepLeft)
+	if root == nil {
+		return 0
 	}
 
-	if root.Right != nil {
-		deepRight++
-		deepRight = minDepth_caclDepth(root.Right, deepRight)
+	if root.Right == nil && root.Left != nil {
+		return 1 + minDepth(root.Left)
 	}
 
-	if deepLeft <= deepRight {
-		return deepLeft
+	if root.Left == nil && root.Right != nil {
+		return 1 + minDepth(root.Right)
+	}
+
+	minLeft := minDepth(root.Left)
+	minRight := minDepth(root.Right)
+
+	if minLeft < minRight {
+		return minLeft
 	} else {
-		return deepRight
+		return minRight
 	}
 }
 
@@ -68,8 +69,8 @@ func Test_2293_01(t *testing.T) {
 		root *TreeNode
 		want int
 	}{
-		// {NewBinaryTree([]int{0, 3, 9, 20, -1, -1, 15, 7}), 2},
-		{NewBinaryTree([]int{0, 2, -1, 3, -1, 4, -1, 5, -1, 6}), 5},
+		{NewBinaryTree([]int{0, 3, 9, 20, -1, -1, 15, 7}), 2},
+		// {NewBinaryTree([]int{0, 2, -1, 3, -1, 4, -1, 5, -1, 6}), 5},
 	}
 
 	for i, tt := range testCases {
