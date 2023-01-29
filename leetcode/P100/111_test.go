@@ -25,8 +25,8 @@ func minDepth(root *TreeNode) int {
 		return 1 + minDepth(root.Right)
 	}
 
-	minLeft := minDepth(root.Left)
-	minRight := minDepth(root.Right)
+	minLeft := 1 + minDepth(root.Left)
+	minRight := 1 + minDepth(root.Right)
 
 	if minLeft < minRight {
 		return minLeft
