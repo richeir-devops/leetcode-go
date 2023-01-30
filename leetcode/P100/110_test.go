@@ -4,53 +4,32 @@ import (
 	"testing"
 )
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
 func isBalanced(root *TreeNode) bool {
-	if root == nil {
-		return true
-	}
-
-	leftHeight := isBalanced_maxDepth(root.Left)
-	rightHeight := isBalanced_maxDepth(root.Right)
-	balance := leftHeight - rightHeight
-
-	if balance <= 1 && balance >= -1 {
-		return true
-	} else {
-		return false
-	}
-
-	balancedLeft := isBalanced(root.Left)
-	balancedright := isBalanced(root.Right)
-
-	return balancedLeft && balancedright
+	return isBalanced_Height(root) >= 0
 }
 
-func isBalanced_maxDepth(root *TreeNode) int {
+func isBalanced_Height(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}
 
-	if root.Right == nil && root.Left != nil {
-		return 1 + isBalanced_maxDepth(root.Left)
+	leftHeight := isBalanced_Height(root.Left)
+	rightHeight := isBalanced_Height(root.Right)
+
+	balance := leftHeight - rightHeight
+	isBalance := false
+	if balance <= 1 && balance >= -1 {
+		isBalance = true
 	}
 
-	if root.Left == nil && root.Right != nil {
-		return 1 + isBalanced_maxDepth(root.Right)
-	}
-
-	maxLeft := 1 + isBalanced_maxDepth(root.Left)
-	maxRight := 1 + isBalanced_maxDepth(root.Right)
-
-	if maxLeft > maxRight {
-		return maxLeft
+	if leftHeight >= 0 && rightHeight >= 0 && isBalance {
+		if leftHeight > rightHeight {
+			return leftHeight + 1
+		} else {
+			return rightHeight + 1
+		}
 	} else {
-		return maxRight
+		return -1
 	}
 }
 
