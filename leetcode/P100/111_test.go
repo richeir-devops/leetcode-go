@@ -64,7 +64,7 @@ func CreateTree(treedata []int, pos int) *TreeNode {
 	return curNode
 }
 
-func Test_2293_01(t *testing.T) {
+func Test_111_01(t *testing.T) {
 	testCases := []struct {
 		root *TreeNode
 		want int

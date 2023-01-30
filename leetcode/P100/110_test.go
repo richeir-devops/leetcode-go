@@ -15,100 +15,57 @@ func isBalanced(root *TreeNode) bool {
 		return true
 	}
 
-	balance, _ := CheckNode(root)
+	leftHeight := isBalanced_maxDepth(root.Left)
+	rightHeight := isBalanced_maxDepth(root.Right)
+	balance := leftHeight - rightHeight
 
-	if balance {
+	if balance <= 1 && balance >= -1 {
 		return true
+	} else {
+		return false
 	}
 
-	return false
+	balancedLeft := isBalanced(root.Left)
+	balancedright := isBalanced(root.Right)
+
+	return balancedLeft && balancedright
 }
 
-func CheckNode(node *TreeNode) (bool, int) {
-	deepL := 0
-	deepR := 0
-	allBalance := true
-
-	if node.Left != nil {
-		allBalance, deepL = CheckNode(node.Left)
-		if !allBalance {
-			return false, 0
-		}
+func isBalanced_maxDepth(root *TreeNode) int {
+	if root == nil {
+		return 0
 	}
 
-	if node.Right != nil {
-		allBalance, deepR = CheckNode(node.Right)
-		if !allBalance {
-			return false, 0
-		}
+	if root.Right == nil && root.Left != nil {
+		return 1 + isBalanced_maxDepth(root.Left)
 	}
 
-	//叶子节点处理
-	if node.Left == nil && node.Right == nil {
-		return true, 1
+	if root.Left == nil && root.Right != nil {
+		return 1 + isBalanced_maxDepth(root.Right)
 	}
 
-	//判断当前节点的是否平衡
-	if node.Left != nil && node.Right != nil {
-		// deepL++
-		// deepR++
+	maxLeft := 1 + isBalanced_maxDepth(root.Left)
+	maxRight := 1 + isBalanced_maxDepth(root.Right)
 
-		if deepL-deepR <= 1 && deepL-deepR >= -1 {
-			allBalance = true
-		} else {
-			return false, 0
-		}
-
-		if deepL > deepR {
-			return true, deepL + 1
-		}
-		return true, deepR + 1
-	} else if node.Left != nil && node.Right == nil {
-		// deepL++
-
-		if deepL-deepR <= 1 && deepL-deepR >= -1 {
-			allBalance = true
-		} else {
-			return false, 0
-		}
-
-		return allBalance, deepL + 1
+	if maxLeft > maxRight {
+		return maxLeft
 	} else {
-		// deepR++
-
-		if deepL-deepR <= 1 && deepL-deepR >= -1 {
-			allBalance = true
-		} else {
-			return false, 0
-		}
-
-		return allBalance, deepR + 1
+		return maxRight
 	}
 }
 
 func Test_110_1(t *testing.T) {
-	t.Log("110")
-	b := 3
-	var a *int
-	a = &b
-	*a++
-	t.Log(b)
+	testCases := []struct {
+		root *TreeNode
+		want bool
+	}{
+		{NewBinaryTree([]int{0, 3, 9, 20, -1, -1, 15, 7}), true},
+	}
 
-	// root := new(TreeNode)
-	// root.Left = new(TreeNode)
-	// root.Right = new(TreeNode)
-	// root.Right.Left = new(TreeNode)
-	// root.Right.Right = new(TreeNode)
-
-	root := new(TreeNode)
-	root.Right = new(TreeNode)
-	root.Right.Right = new(TreeNode)
-
-	// root := new(TreeNode)
-	// root.Left = new(TreeNode)
-
-	t.Log(isBalanced(root))
-
-	ch := 'b'
-	t.Log(ch / 2.0)
+	for i, tt := range testCases {
+		got := isBalanced(tt.root)
+		if got != tt.want {
+			t.Errorf("\nTest Case #%v \ndata: %v \nwant: %v \ngot: %v \n\n", i, tt, tt.want, got)
+		}
+	}
 }
