@@ -1,4 +1,4 @@
-package p000
+package P000
 
 import (
 	"math"

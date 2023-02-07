@@ -1,4 +1,4 @@
-package p000
+package P000
 
 func isValid(s string) bool {
 	intStr := []rune(s)
